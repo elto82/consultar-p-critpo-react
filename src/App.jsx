@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import image from "./cryptomonedas.png";
+import Formulario from "./components/Formulario";
 
 const Heading = styled.h1`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -28,7 +29,7 @@ const Image = styled.img`
 const Contenedor = styled.div`
   max-width: 900px;
   margin: 0 auto;
-  @media (min-width: 400px) {
+  @media (min-width: 600px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
@@ -42,6 +43,7 @@ const App = () => {
       </div>
       <div>
         <Heading>Cotiza Criptomonedas al Instante</Heading>
+        <Formulario />
       </div>
     </Contenedor>
   );
