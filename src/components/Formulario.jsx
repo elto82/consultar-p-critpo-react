@@ -3,6 +3,7 @@ import useMoneda from "../hokks/useMoneda";
 import useCriptoMoneda from "../hokks/useCriptoMoneda";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Error from "./Error";
 
 const Boton = styled.input`
   margin-top: 20px;
@@ -22,7 +23,8 @@ const Boton = styled.input`
     box-shadow: 0 0 10px #66a2e2;
   }
 `;
-const Formulario = () => {
+const Formulario = ({ setMoneda, setCriptomoneda }) => {
+  const [error, setError] = useState(false);
   const [listaCripto, setListaCripto] = useState([]);
 
   const MONEDAS = [
@@ -59,8 +61,22 @@ const Formulario = () => {
     getApi();
   }, []);
 
+  const handleCotizarMoneda = (e) => {
+    e.preventDefault();
+    //validar campos
+    if ([moneda, criptomoneda].includes("")) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    //pasar datos al componente principal
+    setMoneda(moneda);
+    setCriptomoneda(criptomoneda);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleCotizarMoneda}>
+      {error && <Error mensaje="Todos los campos son obligatorios" />}
       <SelectMonedas />
       <SelectCripto />
       <Boton type="submit" value="Calcular" />
